@@ -10,6 +10,7 @@ import './main.css';
 import utils from '../utils';
 import { createModuleLoader, createFieldModule, setRootRoute } from '../utils/fieldModules';
 import components from '../components';
+import t from '../components/t';
 
 Vue.config.productionTip = false;
 
@@ -27,6 +28,9 @@ if (window.farmOS.modules === undefined) {
 // Register the shared component library globally so they can be accessed from
 // any other component on the root Vue instance.
 components.forEach((c) => { Vue.component(c.name, c); });
+
+// Globally apply the t mixin, which provides translations along with the l10n module
+Vue.mixin(t);
 
 const deps = { ...store, state: store.state, router };
 const loadFieldModule = createModuleLoader(deps);
